@@ -18,8 +18,8 @@ crt;
 
 Var 
   Nom, Ape, menu, boletos, ruta, SUS, MT, TB, Input, Rs, Rd, Dec: String;
-  ClavC, Nb, Nb1, P, P1, U, CBU, Q, Sal, BP: Integer;
-  Ced1, Ced, CC, Clav1, Clav: LongInt;
+  ClavC, Nb, Nb1, P, P1, U, CBU, Q, BP: Integer;
+  Ced1, Ced, CC, Clav1, Clav, Sal: LongInt;
   Pl1,Pl2,Pl3,Pl4,Pl5,Pl6,Pl7,Pl8: Integer;
   Pv1,Pv2,Pv3,Pv4,Pv5,Pv6,Pv7,Pv8: real;
 
@@ -466,7 +466,6 @@ Begin
       writeln('El valor no es valido.');
   End;
 
-
   Begin {clave}
     WriteLn('---------------------------------------------------------------------------');
     Writeln('Ingrese una clave de seguridad no mayor a 4 digitos para usarla');
@@ -855,6 +854,7 @@ Begin
            Begin
              clrscr;
              WriteLn('Eliga el Punto de Partida y el Destino: [CON SUS RESPECTIVAS MAYUSCULAS]');
+             Textcolor(11);
              Write('| Linea 7:');
              WriteLn(' ------------------------------------------------------------------------------------------------|');
              WriteLn('|-Las Flores  |- El Cristo      |-Roosevelt       |-Panteon     |-Roca Tarpeya  |-Socorro   |-La Bandera   |');
@@ -1007,7 +1007,7 @@ Begin
                   Write('Ingrese el monto a pagar para cancelar el restante: ');
                   Readln(Sal);
                   WriteLn('-----------------------------------------------------------------------------------------------');
-                Until (P = 0) Or (P < Sal);
+                Until (P = 0) Or (P <= Sal);
               If (Sal > p) Then
 
                 WriteLn('-----------------------------------------------------------------------------------------------');
@@ -1143,7 +1143,6 @@ Begin
                   End
 
            Else If (Q = 9) Or (Q = 10) Then
-
                   Begin
                     textcolor(4);
                     write(TB);
