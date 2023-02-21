@@ -19,7 +19,7 @@ crt;
 Var 
   Nom, Ape, menu, boletos, ruta, SUS, MT, TB, Input, Rs, Rd, Dec: String;
   ClavC, Nb, Nb1, P, P1, U, CBU, Q, BP: Integer;
-  Ced1, Ced, CC, Clav1, Clav, Sal: LongInt;
+  Ced1, Ced, CC, Clav1, Clav, Sal, Sal1: LongInt;
   Pl1,Pl2,Pl3,Pl4,Pl5,Pl6,Pl7,Pl8: Integer;
   Pv1,Pv2,Pv3,Pv4,Pv5,Pv6,Pv7,Pv8: real;
 
@@ -34,8 +34,8 @@ Const
   D = 'Boletos Ida y vuelta integrado [d]';{ 4 Amarillo 14}
   E = 'Boletos Multiabono [e]';{ 5 Naranja 12}
   F = 'Boletos Multiabono integrado [f]';{ 6 Naranja 12}
-  G = 'Boletos Estudiantil simple [g]';{ 7 Azul 2}
-  H = 'Boletos Estudiantil integrado [h]';{ 8 Azul 2}
+  G = 'Boletos Estudiantil simple [g]';{ 7 Azul 1}
+  H = 'Boletos Estudiantil integrado [h]';{ 8 Azul 1}
   I = 'Boletos MetroTarjeta [i]';{ 9 Rojo 4}
   J = 'Boletos MetroTarjeta Integrada [j]';{ 10 Rojo 4}
 
@@ -75,7 +75,6 @@ Begin
               Until (Ced > 1000000) And (Ced < 40000000) And (Ced1 = 0);
               CC := Ced;
 
-              {Repetido:}
               Begin
                 WriteLn('---------------------------------------------------------------------------');
                 WriteLn('Mucho gusto, ', Nom ,' ', Ape);
@@ -506,7 +505,7 @@ Begin
            Begin
              WriteLn('---------------------------------------------------------------------------');
              write('Has seleccionado ' ,Nb,' ');
-             textcolor(2);
+             textcolor(1);
              write(TB);
              Textcolor(lightgray);
              WriteLn(' por el monto de: ',P,'$');
@@ -562,7 +561,7 @@ Begin
       Textcolor(11);
       Write('| Linea 7:');
       WriteLn(' ------------------------------------------------------------------------------------------------|');
-      WriteLn('|-Las Flores  |- El Cristo      |-Roosevelt       |-Panteon     |-Roca Tarpeya  |-Socorro   |-La Bandera   |');
+      WriteLn('|-Las Flores  |-El Cristo       |-Roosevelt       |-Panteon     |-Roca Tarpeya  |-Socorro   |-La Bandera   |');
       writeln('|-INCES       |-La Hoyada       |-Los Ilustres    |-Presidente Medina                                      |');
       Textcolor(2);
       Write('| Linea 8:');
@@ -857,7 +856,7 @@ Begin
              Textcolor(11);
              Write('| Linea 7:');
              WriteLn(' ------------------------------------------------------------------------------------------------|');
-             WriteLn('|-Las Flores  |- El Cristo      |-Roosevelt       |-Panteon     |-Roca Tarpeya  |-Socorro   |-La Bandera   |');
+             WriteLn('|-Las Flores  |-El Cristo       |-Roosevelt       |-Panteon     |-Roca Tarpeya  |-Socorro   |-La Bandera   |');
              writeln('|-INCES       |-La Hoyada       |-Los Ilustres    |-Presidente Medina                                      |');
              WriteLn('|----------------------------------------------------------------------------------------------------------|');
              textcolor(7);
@@ -961,7 +960,7 @@ Begin
 
   Else If (Q = 7) Or (Q = 8) Then
          Begin
-           textcolor(2);
+           textcolor(1);
            write(TB);
            Textcolor(lightgray);
          End
@@ -995,27 +994,41 @@ Begin
       'si':
             Begin
               WriteLn('-----------------------------------------------------------------------------------------------');
-              Write('Ingrese el monto para pagar:  ');
-              ReadLn(Sal);
-              WriteLn('Monto total a pagar: ', P,'$');
-              If (Sal < P) Then
-                Repeat
-                  writeln('Saldo insuficiente');
-                  P := (P - Sal);
-                  WriteLn('-----------------------------------------------------------------------------------------------');
-                  Writeln('Monto restante por pagar: ', P,'$');
-                  Write('Ingrese el monto a pagar para cancelar el restante: ');
-                  Readln(Sal);
-                  WriteLn('-----------------------------------------------------------------------------------------------');
-                Until (P = 0) Or (P <= Sal);
-              If (Sal > p) Then
 
-                WriteLn('-----------------------------------------------------------------------------------------------');
-              WriteLn('Sobrepasaste el monto a pagar');
-              Sal := (Sal - p);
-              Writeln('El cambio es de: ' ,Sal, '$');
+              Repeat
+                WriteLn('Monto total a pagar: ', P,'$');
+                Write('Ingrese el monto para pagar:  ');
+                readln(Input);
+                Val(Input, Sal, Sal1);
+              Until (Sal1 = 0);
+
+              If (Sal < P) Then
+                Begin
+                  Repeat
+                    writeLn('-----------------------------------------------------------------------------------------------');
+                    writeln('Saldo insuficiente');
+                    P := (P - Sal);
+                    Writeln('Monto restante por pagar: ', P,'$');
+                    Write('Ingrese el monto a pagar para cancelar el restante: ');
+                    Readln(Sal);
+                    WriteLn('-----------------------------------------------------------------------------------------------');
+                  Until (P = 0) Or (P <= Sal);
+                End
+              Else If (Sal > p) Then
+                     Begin
+                       WriteLn('-----------------------------------------------------------------------------------------------');
+                       WriteLn('Sobrepasaste el monto a pagar');
+                       Sal := (Sal - p);
+                       Writeln('El cambio es de: ' ,Sal, '$');
+                     End
+              Else If (Sal = p) Then
+                     Begin
+                       WriteLn('-----------------------------------------------------------------------------------------------');
+                       Sal := (Sal - p);
+                       Writeln('El cambio es de: ' ,Sal, '$');
+                     End
+              Else WriteLn('Respuesta no valida, responda:');
             End;
-      Else WriteLn('Respuesta no valida, responda:');
     End;
   Until (Dec = 'si') Or (Dec = 'no');
 
@@ -1090,7 +1103,7 @@ Begin
 
                Else If (Q = 7) Or (Q = 8) Then
                       Begin
-                        textcolor(2);
+                        textcolor(1);
                         writeln(TB);
                         Textcolor(lightgray);
                       End
@@ -1137,7 +1150,7 @@ Begin
 
            Else If (Q = 7) Or (Q = 8) Then
                   Begin
-                    textcolor(2);
+                    textcolor(1);
                     write(TB);
                     Textcolor(lightgray);
                   End
