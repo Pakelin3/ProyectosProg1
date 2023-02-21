@@ -1325,9 +1325,10 @@ Begin
                    Pl7 := 0;
                  End;
                WriteLn('|-Linea 7: ',Pl7,'                  Ventas: ',Pv7:0:2,'                          |');
-               Begin
-                 Pv8 := (Pv8 / Pl8);
-               End;
+               If (Pl8 <> 0) Then
+                 Begin
+                   Pv8 := (Pv8 / Pl8);
+                 End;
                If (Pl8 = 0) Then
                  Begin
                    Pl8 := 0;
