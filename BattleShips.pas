@@ -119,6 +119,43 @@ Begin
     End;
 End;
 
+Procedure Instructivo;
+    Begin
+             clrscr;
+             writeln('BIENVENIDO CAPITAN!!');
+	     writeln;
+             writeln('Este juego es llamado "Hundir la flota" (Battleship para el que se crea gringo)');
+             writeln('Las reglas son muy sencillas:');
+             writeln;
+             writeln('1. El objetivo es acertar en el objetivo, los cuales son las naves enemigas.');
+             writeln;
+             writeln('2. Para seleccionar un punto en el cual atacar, lo unico que debes hacer es seleccionar una fila y una columna. Tras esto, el juego te indicara el si has acertado (X) o si has fallado (O).');
+             writeln;
+             writeln('3. Por cada nave a la cual se logre acertar correctamente, ganas 200 puntos. Pero si fallas el tiro, pierdes 100!');
+             writeln;
+             writeln('4. Hay tres modos de juego, facil, normal, y dificil, siendo la diferencia la cantidad de disparos que puedes ejecutar entre cada modo:');
+             writeln;
+             writeln('--------------------------------------------------------------------------------');
+             writeln('*Facil: 40 misiles, disfruta del juego');
+             writeln;
+             writeln('*Medio: 25 misiles, pongamoslo algo interesante');
+             writeln;
+             write('*Dificil: 15 misiles. Hay que admitirlo, este se ve injusto, pero...');
+             TextColor(Red);
+			TextBackground(Black);
+			WriteLn('TE ATREVES?');
+			TextColor(white);
+			TextBackground(Black);
+              writeln('--------------------------------------------------------------------------------');
+             writeln;
+             writeln('5. Pierdes si te has quedado sin misiles que disparar.');
+             writeln;
+             writeln('Y eso resumiria este juego, disfruten.');
+             writeln;
+			TextColor(Green);
+			TextBackground(Black);
+			WriteLn('(Y si sale un hombre con barba de pulpo preguntando que si tienen miedo a la muerte, le dicen que no)');
+           End;
 
 
 
@@ -194,46 +231,10 @@ Begin
              readln;
 
            End;
-      '2':
-           Begin
-             writeln('BIENVENIDO CAPITAN!!');
-             writeln;
-             writeln('Este juego es llamado "Hundir la flota" (Battleship para el que se crea gringo');
-             writeln;
-             writeln('Las reglas son muy sencillas:');
-             writeln;
-             writeln('1. El objetivo es acertar en el objetivo, los cuales son las naves enemigas.');
-             writeln;
-             writeln('2. Para seleccionar un punto en el cual atacar, lo unico que debes hacer es seleccionar una fila y una columna. Tras esto, el juego te indicara el si has acertado (X) o si has fallado (O).');
-             writeln;
-             writeln('3. Por cada nave a la cual se logre acertar correctamente, ganas 200 puntos. Pero si fallas el tiro, pierdes 100!');
-             writeln;
-             writeln('4. Hay tres modos de juego, facil, normal, y dificil, siendo la diferencia la cantidad de disparos que puedes ejecutar entre cada modo:');
-             writeln;
-             writeln('--------------------------------------------------------------------------------');
-             writeln('*Facil: 40 misiles, disfruta del juego');
-             writeln;
-             writeln('*Medio: 25 misiles, pongamoslo algo interesante');
-             writeln;
-             write('*Dificil: 15 misiles. Hay que admitirlo, este se ve injusto, pero...');
-             TextColor(Red);
-			TextBackground(Black);
-			WriteLn('TE ATREVES?');
-			TextColor(white);
-			TextBackground(Black);
-              writeln('--------------------------------------------------------------------------------');
-             writeln;
-             writeln('5. Pierdes si te has quedado sin misiles que disparar.');
-             writeln;
-             writeln('Y eso resumiria este juego, disfruten.');
-             writeln;
-             writeln;
-             writeln;
-             writeln;
-			TextColor(Green);
-			TextBackground(Black);
-			WriteLn('(Y si sale un hombre con barba de pulpo preguntando que si tienen miedo a la muerte, le dicen que no)');
-           End;
+      '2'
+      	   Begin
+           	Instructivo;
+	   End;
       '3':
            Begin
              writeln('Adios');
