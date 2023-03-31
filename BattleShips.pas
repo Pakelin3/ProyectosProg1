@@ -3,6 +3,8 @@ Program BattleShips;
 
 Uses crt, SysUtils;
 
+// Moises Cardenas
+// Martin Marcano
 
 Const 
   N = 10;
@@ -14,7 +16,7 @@ Type
 
 Var 
   Mapa : tMapa;
-  fila, fila1, col, col1, i, j, trys: Integer;
+  fila, fila1, col, col1, trys, P: Integer;
   Input, D : String;
   opcion: char;
 
@@ -76,6 +78,7 @@ Begin
       textcolor(1);
       writeln('FALLASTE EL TIRO');
       Mapa[fila, col] := 'O';
+      p := p - 100;
       textcolor(7);
 
     End;
@@ -84,6 +87,7 @@ Begin
       textcolor(4);
       writeln('LE DISTE A UN BARCO');
       Mapa[fila, col] := 'X';
+      p := p + 200;
       textcolor(7);
 
     End;
@@ -118,45 +122,6 @@ Begin
       Mapa[fila, col] := 'v';
     End;
 End;
-
-Procedure Instructivo;
-    Begin
-             clrscr;
-             writeln('BIENVENIDO CAPITAN!!');
-	     writeln;
-             writeln('Este juego es llamado "Hundir la flota" (Battleship para el que se crea gringo)');
-             writeln('Las reglas son muy sencillas:');
-             writeln;
-             writeln('1. El objetivo es acertar en el objetivo, los cuales son las naves enemigas.');
-             writeln;
-             writeln('2. Para seleccionar un punto en el cual atacar, lo unico que debes hacer es seleccionar una fila y una columna. Tras esto, el juego te indicara el si has acertado (X) o si has fallado (O).');
-             writeln;
-             writeln('3. Por cada nave a la cual se logre acertar correctamente, ganas 200 puntos. Pero si fallas el tiro, pierdes 100!');
-             writeln;
-             writeln('4. Hay tres modos de juego, facil, normal, y dificil, siendo la diferencia la cantidad de disparos que puedes ejecutar entre cada modo:');
-             writeln;
-             writeln('--------------------------------------------------------------------------------');
-             writeln('*Facil: 40 misiles, disfruta del juego');
-             writeln;
-             writeln('*Medio: 25 misiles, pongamoslo algo interesante');
-             writeln;
-             write('*Dificil: 15 misiles. Hay que admitirlo, este se ve injusto, pero...');
-             TextColor(Red);
-			TextBackground(Black);
-			WriteLn('TE ATREVES?');
-			TextColor(white);
-			TextBackground(Black);
-              writeln('--------------------------------------------------------------------------------');
-             writeln;
-             writeln('5. Pierdes si te has quedado sin misiles que disparar.');
-             writeln;
-             writeln('Y eso resumiria este juego, disfruten.');
-             writeln;
-			TextColor(Green);
-			TextBackground(Black);
-			WriteLn('(Y si sale un hombre con barba de pulpo preguntando que si tienen miedo a la muerte, le dicen que no)');
-           End;
-
 
 
 Begin
@@ -207,6 +172,7 @@ Begin
              writeln('[BattleShip]');
              InicializarMapa();
              GenerarBarcos();
+             p := 2000;
              Repeat
                clrscr;
                writeln('[BattleShip]');
@@ -214,6 +180,7 @@ Begin
                PreguntarCoordenadas();
                RealizarDisparo();
                WriteLn('Pulsa enter para refrescar: ');
+               WriteLn('Tienes ', p , ' puntos');
                trys := trys - 1;
                readkey;
                If (trys = 0) Then
@@ -231,10 +198,51 @@ Begin
              readln;
 
            End;
-      '2'
-      	   Begin
-           	Instructivo;
-	   End;
+      '2':
+           Begin
+             clrscr;
+             writeln('BIENVENIDO CAPITAN!!');
+             writeln;
+             writeln('Este juego es llamado "Hundir la flota" (Battleship para el que se crea gringo)');
+             writeln('Las reglas son muy sencillas:');
+             writeln;
+             writeln('1. El objetivo es acertar en el objetivo, los cuales son las naves enemigas.');
+             writeln;
+             writeln('2. Para seleccionar un punto en el cual atacar, lo unico que debes hacer es seleccionar una fila ');
+             WriteLn('y una columna. Tras esto, el juego te indicara el si has acertado (X) o si has fallado (O).');
+             writeln;
+             writeln('3. Por cada nave a la cual se logre acertar correctamente, ganas 200 puntos. Pero si fallas el tiro, ');
+             WriteLn('solo ganaras 1 punto!');
+             writeln;
+             writeln('4. Hay tres modos de juego, facil, normal, y dificil, siendo la diferencia la cantidad de ');
+             WriteLn('disparos que puedes ejecutar entre cada modo:');
+             writeln;
+             writeln('--------------------------------------------------------------------------------');
+             writeln('*Facil: 40 misiles, disfruta del juego');
+             writeln;
+             writeln('*Medio: 25 misiles, pongamoslo algo interesante');
+             writeln;
+             write('*Dificil: 15 misiles. Hay que admitirlo, este se ve injusto, pero...');
+             TextColor(Red);
+             TextBackground(Black);
+             WriteLn(' TE ATREVES?');
+             TextColor(7);
+             TextBackground(Black);
+             writeln('--------------------------------------------------------------------------------');
+             writeln;
+             writeln('5. Pierdes si te has quedado sin misiles que disparar.');
+             writeln;
+             writeln('Y eso resumiria este juego, disfruten.');
+             writeln;
+             TextColor(Green);
+             TextBackground(Black);
+             WriteLn('(Y si sale un hombre con barba de pulpo preguntando que si tienen miedo a la muerte, le dicen que no)');
+             TextColor(7);
+             WriteLn;
+             writeln('Presiona enter para ir al menu principal');
+             readkey;
+             goto 1;
+           End;
       '3':
            Begin
              writeln('Adios');
