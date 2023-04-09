@@ -1,0 +1,66 @@
+program lidotel;
+uses sysutils;
+type
+   ficha = Record
+      nombre: String;
+      apellido: String;
+      telefono: string;
+      cedula:string;
+      email:string;
+      dias:integer;
+      habitacion:string;
+   end;
+
+var
+   name:string;
+   lista: ficha;
+   f: file of ficha;
+procedure registro;
+begin
+	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+Assign(f,(name));
+   Rewrite(f);
+   writeln('por favor, ingrese su nombre');
+   readln(lista.nombre);
+   writeln('por favor, ingrese su apellido');
+   readln(lista.apellido);
+   writeln('por favor, ingrese su numero de telefono');
+   readln(lista.telefono);
+   lista.cedula:=(name);
+   writeln('por favor, ingrese su correo electronico');
+   readln(lista.email);
+   writeln('por favor, ingrese la cantidad de dias que durará su estancia');
+   readln(lista.dias);
+   readln(lista.habitacion);
+   Write(f,lista);
+   Close(f);
+end;
+procedure chequeo;
+begin
+   assign(f,(name));
+   reset(f); 
+   while not eof(f) do
+   begin
+		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+      read(f,lista);
+      writeln('Nombre: ',lista.nombre);
+      writeln('Apellido: ',lista.apellido);
+      writeln('Telefono: ',lista.telefono);
+      writeln('Numero de cedula: ',lista.cedula);
+      writeln('Correo electronico: ',lista.email);
+      writeln('Dias de estancia programados: ',lista.dias);
+      writeln('Tipo de habitacion: ',lista.habitacion);
+   end;
+   close(f);
+end;
+begin
+Writeln('Bienvenido, estimado cliente!');
+writeln('antes de continuar, por favor introduzca su numero de cedula');
+	readln(name);
+    if FileExists((name)) then
+        chequeo
+    else
+        registro
+    
+
+end.
