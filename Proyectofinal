@@ -8,6 +8,9 @@ type
       cedula:string;
       email:string;
       dias:integer;
+      Integrantes:integer;
+      Peques:integer;
+      Adultos:integer;
       habitacion:string;
    end;
 
@@ -29,9 +32,6 @@ Assign(f,(name));
    lista.cedula:=(name);
    writeln('por favor, ingrese su correo electronico');
    readln(lista.email);
-   writeln('por favor, ingrese la cantidad de dias que durará su estancia');
-   readln(lista.dias);
-   readln(lista.habitacion);
    Write(f,lista);
    Close(f);
 end;
@@ -49,10 +49,71 @@ begin
       writeln('Numero de cedula: ',lista.cedula);
       writeln('Correo electronico: ',lista.email);
       writeln('Dias de estancia programados: ',lista.dias);
+       writeln('Integrantes de la reservación: ',lista.Integrantes);
+      writeln('Adultos: ',lista.Adultos);
+      writeln('Menores: ',lista.peques);
       writeln('Tipo de habitacion: ',lista.habitacion);
    end;
    close(f);
 end;
+procedure info;
+begin
+			writeln('Nuestras instalaciones le ofrecen las siguientes oportunidades de alojamiento:');
+			writeln;
+			writeln('FAMILY ROOM – 200$ por noche');
+			writeln;
+			writeln('Calida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo, ');
+			writeln('cama Lidotel Royal King, con reloj despertador, TV 32 pulgadas HD Plasma con cable, sanitario con '); 
+			writeln('ducha, cafetera electrica, nevera ejecutiva, caja electrónica de seguridad y secador de'); 
+			writeln('cabello, armario adicional amplio, una habitacion separada con 2 camas full, sanitario con ducha.');
+			writeln;
+			writeln('Incluye: ');
+			writeln;
+			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
+			writeln('Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y');
+			writeln('toldos en la playa, kit de vanidades y infantes de 0 a 2 años sin recargos.');
+			writeln;
+			writeln('SENCILLA – 60$ por noche');
+			writeln;
+			writeln('Amplia y confortable habitacion decorada con un estilo vanguardista, cama Lidotel Royal ');
+			writeln('King con sabanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32 pulgadas'); 
+			writeln('HD Plasma con cable, sanitario con ducha, cafetera electrica, nevera ejecutiva, caja ');
+			writeln('electronica de seguridad y secador de cabello');
+			writeln;
+			writeln('Incluye:  ');
+			writeln;
+			writeln('Desayuno Buffet en Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
+			writeln('acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso'); 
+			writeln('a nuestro moderno gimnasio y Kit de vanidades. infantes de 0 a 2 años sin recargos.');
+			writeln;
+			writeln('DOBLE – 120$ por noche');
+			writeln;
+			writeln('Amplia y confortable habitación decorada con un estilo vanguardista, Dos Camas Lidotel'); 
+			writeln('Full con sabanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32 pulgadas'); 
+			writeln('HD Plasma con cable, bano con ducha, cafetera electrica, nevera ejecutiva, caja'); 
+			writeln('electrónica de seguridad secador de cabello.');
+			writeln;
+			writeln('Incluye: ');
+			writeln;
+			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
+			writeln('acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso'); 
+			writeln('a nuestro moderno gimnasio y Kit de vanidades. Infantes de 0 a 2 años sin recargos');
+			writeln;
+			writeln('SUITE – 300$ por noche');
+			writeln;
+			writeln('Calida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo, ');
+			writeln('Cama Lidotel Royal King, con reloj despertador, TV 32 pulgadas HD Plasma con cable, 2 sanitarios');
+			writeln('con ducha, cafetera eléctrica, nevera ejecutiva, caja electronica de seguridad y secador'); 
+			writeln('de cabello, armario adicional amplio y area separada con 2 sofa-cama individuales.');
+			writeln;
+			writeln('Incluye:');
+			writeln;
+			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),');
+			writeln('Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y'); 
+			writeln('toldos en la playa, kit de vanidades y infantes de 0 a 2 años sin recargos.');
+end;
+
+
 begin
 Writeln('Bienvenido, estimado cliente!');
 writeln('antes de continuar, por favor introduzca su numero de cedula');
@@ -60,7 +121,6 @@ writeln('antes de continuar, por favor introduzca su numero de cedula');
     if FileExists((name)) then
         chequeo
     else
-        registro
-    
+        registro;
 
 end.
