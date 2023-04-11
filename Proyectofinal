@@ -1,126 +1,293 @@
-program lidotel;
-uses sysutils;
+
+Program ProyectoFinal;
+
+Uses SysUtils, crt;
+
 type
-   ficha = Record
+   Simple = Record
       nombre: String;
       apellido: String;
       telefono: string;
       cedula:string;
       email:string;
       dias:integer;
-      Integrantes:integer;
-      Peques:integer;
-      Adultos:integer;
       habitacion:string;
    end;
+   
+   Acompannado = Record
+      nombre1: String;
+      apellido1: String;
+      nombre2: String;
+      apellido2: String;
+      telefono1: string;
+      telefono2: string;
+      cedula1:string;
+      cedula2:string;
+      email:string;
+      dias:integer;
+      habitacion:string;
+      end;
+      
+      Familiar = Record
+      nombre: String;
+      apellido: String;
+      telefono: string;
+      cedula:string;
+      email:string;
+      Peques:integer;
+      Adultos:integer;
+      dias:integer;
+      habitacion:string;
+      end;
 
-var
-   name:string;
-   lista: ficha;
-   f: file of ficha;
-procedure registro;
+
+Var 
+ 
+  Ced, NTel, D, res: Integer;
+  Nom, Ape, EM, Tipo_Regis, name: String;
+  lista1: Simple;
+  lista2: Acompannado;
+  lista3: Familiar;
+  f1: file Of Simple;
+  f2: file of Acompannado;
+  f3: file of Familiar;
+
+Procedure FAMILY_ROOM();
+// 200 por noche
+Begin
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  writeln('|Cálida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo    |');
+  WriteLn('|cama Lidotel Royal King, con reloj despertador, TV 32” HD Plasma con cable, baño con       |');
+  WriteLn('|ducha, cafetera eléctrica, nevera ejecutiva, caja electrónica de seguridad y secador de    |');
+  WriteLn('|cabello, armario adicional amplio, una habitación separada con 2 camas full, baño con      |');
+  WriteLn('|ducha.                                                                                     |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                        Incluye                                            |');
+  WriteLn('|                                                                                           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|Desayuno Buffet en el Restaurant Le Nouveau, acceso inalámbrico a Internet (WIFI),         |');
+  WriteLn('|Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y     |');
+  WriteLn('|toldos en la playa, kit de vanidades y niños de 0 a 2 años sin recargos.                   |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+End;
+Procedure SENCILLA();
+// 60 por noche
+Begin
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  writeln('|Amplia y confortable habitación decorada con un estilo vanguardista, cama Lidotel Royal    |');
+  WriteLn('|King con sábanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32”       |');
+  WriteLn('|HD Plasma con cable, baño con ducha, cafetera eléctrica, nevera ejecutiva, caja            |');
+  WriteLn('|electrónica de seguridad y secador de cabello                                              |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                        Incluye                                            |');
+  WriteLn('|                                                                                           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|Desayuno Buffet en Restaurant Le Nouveau, acceso inalámbrico a Internet (WIFI),            |');
+  WriteLn('|acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso   |');
+  WriteLn('|a nuestro moderno gimnasio y Kit de vanidades. Niños de 0 a 2 años sin recargos.           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+End;
+Procedure DOBLE();
+// 120 por noche
+Begin
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  writeln('|Amplia y confortable habitación decorada con un estilo vanguardista, Dos Camas Lidotel     |');
+  WriteLn('|Full con sabanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32”       |');
+  WriteLn('|HD Plasma con cable, bano con ducha, cafetera eléctrica, nevera ejecutiva, caja            |');
+  WriteLn('|electrónica de seguridad y secador de cabello                                              |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                        Incluye                                            |');
+  WriteLn('|                                                                                           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|Desayuno Buffet en Restaurant Le Nouveau, acceso inalámbrico a Internet (WIFI),            |');
+  WriteLn('|acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso   |');
+  WriteLn('|a nuestro moderno gimnasio y Kit de vanidades. Niños de 0 a 2 años sin recargos.           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+End;
+Procedure SUITE();
+// 300 por noche
+Begin
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  writeln('|Cálida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo,   |');
+  WriteLn('|Cama Lidotel Royal King, con reloj despertador, TV 32” HD Plasma con cable, 2 baños        |');
+  WriteLn('|con ducha, cafetera eléctrica, nevera ejecutiva, caja electrónica de seguridad y secador   |');
+  WriteLn('|de cabello, armario adicional amplio y área separada con 2 sofá-cama individuales.         |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                        Incluye                                            |');
+  WriteLn('|                                                                                           |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|Desayuno Buffet en el Restaurant Le Nouveau, acceso inalámbrico a Internet (WIFI),         |');
+  WriteLn('|Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y     |');
+  WriteLn('|toldos en la playa, kit de vanidades y niños de 0 a 2 años sin recargos.                   |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+End;
+procedure registroS;
 begin
 	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
-Assign(f,(name));
-   Rewrite(f);
+Assign(f1,(name));
+   Rewrite(f1);
    writeln('por favor, ingrese su nombre');
-   readln(lista.nombre);
+   readln(lista1.nombre);
    writeln('por favor, ingrese su apellido');
-   readln(lista.apellido);
+   readln(lista1.apellido);
    writeln('por favor, ingrese su numero de telefono');
-   readln(lista.telefono);
-   lista.cedula:=(name);
+   readln(lista1.telefono);
+   lista1.cedula:=(name);
    writeln('por favor, ingrese su correo electronico');
-   readln(lista.email);
-   Write(f,lista);
-   Close(f);
+   readln(lista1.email);
+   Write(f1,lista1);
+   Close(f1);
 end;
-procedure chequeo;
+
+procedure registroA;
 begin
-   assign(f,(name));
-   reset(f); 
-   while not eof(f) do
+	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+Assign(f2,(name));
+   Rewrite(f2);
+   writeln('por favor, ingrese su nombre');
+   readln(lista2.nombre1);
+   writeln('por favor, ingrese su apellido');
+   readln(lista2.apellido1);
+   lista2.cedula1:=(name);
+   readln(lista2.telefono1);
+   writeln('Nombre de acopañante');
+   readln(lista2.nombre2);
+   writeln('Apellido de acompañante');
+   readln(lista2.Apellido2);
+   writeln('Cedula de acompañante');
+   readln(lista2.Cedula2);
+   writeln('por favor, ingrese su numero de telefono');
+   readln(lista2.telefono2);
+   writeln('por favor, ingrese su correo electronico');
+   readln(lista1.email);
+   Write(f2,lista2);
+   Close(f2);
+end;
+procedure registroF;
+begin
+	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+Assign(f3,(name));
+   Rewrite(f3);
+   writeln('por favor, ingrese su nombre');
+   readln(lista3.nombre);
+   writeln('por favor, ingrese su apellido');
+   readln(lista3.apellido);
+   lista3.cedula:=(name);
+   readln(lista3.telefono);
+   writeln('Cuantos adultos?');
+   readln(lista3.Adultos);
+   writeln('Cuantos infantes?');
+   readln(lista3.Peques);
+   writeln('por favor, ingrese su correo electronico');
+   readln(lista3.email);
+   
+   Write(f3,lista3);
+   Close(f3);
+end;
+
+
+
+// WriteLn('');
+procedure chequeoS;
+begin
+   assign(f1,(name));
+   reset(f1); 
+   while not eof(f1) do
    begin
 		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
-      read(f,lista);
-      writeln('Nombre: ',lista.nombre);
-      writeln('Apellido: ',lista.apellido);
-      writeln('Telefono: ',lista.telefono);
-      writeln('Numero de cedula: ',lista.cedula);
-      writeln('Correo electronico: ',lista.email);
-      writeln('Dias de estancia programados: ',lista.dias);
-       writeln('Integrantes de la reservación: ',lista.Integrantes);
-      writeln('Adultos: ',lista.Adultos);
-      writeln('Menores: ',lista.peques);
-      writeln('Tipo de habitacion: ',lista.habitacion);
+      read(f1,lista1);
+      writeln('Nombre: ',lista1.nombre);
+      writeln('Apellido: ',lista1.apellido);
+      writeln('Telefono: ',lista1.telefono);
+      writeln('Numero de cedula: ',lista1.cedula);
+      writeln('Correo electronico: ',lista1.email);
+      writeln('Dias de estancia programados: ',lista1.dias);
+      writeln('Tipo de habitacion: ',lista1.habitacion);
    end;
-   close(f);
-end;
-procedure info;
-begin
-			writeln('Nuestras instalaciones le ofrecen las siguientes oportunidades de alojamiento:');
-			writeln;
-			writeln('FAMILY ROOM – 200$ por noche');
-			writeln;
-			writeln('Calida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo, ');
-			writeln('cama Lidotel Royal King, con reloj despertador, TV 32 pulgadas HD Plasma con cable, sanitario con '); 
-			writeln('ducha, cafetera electrica, nevera ejecutiva, caja electrónica de seguridad y secador de'); 
-			writeln('cabello, armario adicional amplio, una habitacion separada con 2 camas full, sanitario con ducha.');
-			writeln;
-			writeln('Incluye: ');
-			writeln;
-			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
-			writeln('Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y');
-			writeln('toldos en la playa, kit de vanidades y infantes de 0 a 2 años sin recargos.');
-			writeln;
-			writeln('SENCILLA – 60$ por noche');
-			writeln;
-			writeln('Amplia y confortable habitacion decorada con un estilo vanguardista, cama Lidotel Royal ');
-			writeln('King con sabanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32 pulgadas'); 
-			writeln('HD Plasma con cable, sanitario con ducha, cafetera electrica, nevera ejecutiva, caja ');
-			writeln('electronica de seguridad y secador de cabello');
-			writeln;
-			writeln('Incluye:  ');
-			writeln;
-			writeln('Desayuno Buffet en Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
-			writeln('acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso'); 
-			writeln('a nuestro moderno gimnasio y Kit de vanidades. infantes de 0 a 2 años sin recargos.');
-			writeln;
-			writeln('DOBLE – 120$ por noche');
-			writeln;
-			writeln('Amplia y confortable habitación decorada con un estilo vanguardista, Dos Camas Lidotel'); 
-			writeln('Full con sabanas de algodón egipcio, soporte para iPod con reloj despertador, TV 32 pulgadas'); 
-			writeln('HD Plasma con cable, bano con ducha, cafetera electrica, nevera ejecutiva, caja'); 
-			writeln('electrónica de seguridad secador de cabello.');
-			writeln;
-			writeln('Incluye: ');
-			writeln;
-			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),'); 
-			writeln('acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso'); 
-			writeln('a nuestro moderno gimnasio y Kit de vanidades. Infantes de 0 a 2 años sin recargos');
-			writeln;
-			writeln('SUITE – 300$ por noche');
-			writeln;
-			writeln('Calida y confortable habitación decorada con un estilo vanguardista, 100% libre de humo, ');
-			writeln('Cama Lidotel Royal King, con reloj despertador, TV 32 pulgadas HD Plasma con cable, 2 sanitarios');
-			writeln('con ducha, cafetera eléctrica, nevera ejecutiva, caja electronica de seguridad y secador'); 
-			writeln('de cabello, armario adicional amplio y area separada con 2 sofa-cama individuales.');
-			writeln;
-			writeln('Incluye:');
-			writeln;
-			writeln('Desayuno Buffet en el Restaurant Le Nouveau, acceso inalambrico a Internet (WIFI),');
-			writeln('Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y'); 
-			writeln('toldos en la playa, kit de vanidades y infantes de 0 a 2 años sin recargos.');
+   close(f1);
 end;
 
-
+procedure chequeoA;
 begin
-Writeln('Bienvenido, estimado cliente!');
-writeln('antes de continuar, por favor introduzca su numero de cedula');
+   assign(f2,(name));
+   reset(f2); 
+   while not eof(f2) do
+   begin
+		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+      read(f2,lista2);
+      writeln('Nombre: ',lista2.nombre1);
+      writeln('Apellido: ',lista2.apellido1);
+      writeln('Telefono: ',lista2.telefono1);
+      writeln('Numero de cedula: ',lista2.cedula1);
+      writeln('Nombre: ',lista2.nombre2);
+      writeln('Apellido: ',lista2.apellido2);
+      writeln('Telefono: ',lista2.telefono2);
+      writeln('Numero de cedula: ',lista2.cedula2);
+      writeln('Correo electronico: ',lista2.email);
+      writeln('Dias de estancia programados: ',lista2.dias);
+      writeln('Tipo de habitacion: ',lista2.habitacion);
+   end;
+   close(f2);
+end;
+
+procedure chequeoF;
+begin
+   assign(f3,(name));
+   reset(f3); 
+   while not eof(f3) do
+   begin
+		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+      read(f3,lista3);
+      writeln('Nombre: ',lista3.nombre);
+      writeln('Apellido: ',lista3.apellido);
+      writeln('Telefono: ',lista3.telefono);
+      writeln('Numero de Adultos: ',lista3.Adultos);
+      writeln('Numero de Infantes: ',lista3.Peques);
+      writeln('Numero de cedula: ',lista3.cedula);
+      writeln('Correo electronico: ',lista3.email);
+      writeln('Dias de estancia programados: ',lista3.dias);
+      writeln('Tipo de habitacion: ',lista3.habitacion);
+   end;
+   close(f3);
+end;
+
+procedure TipoRes;
+begin 
+writeln('elija el tipo de reservacion');
+writeln('[1]: Solo | [2]: Acompanado | [3]: Familiar ');
+repeat
+begin
+readln(res);
+if (res = 1) then
+begin
+chequeoS;
+end
+else if (res = 2) then
+begin
+chequeoA;
+end
+else if (res = 3) then
+begin
+chequeoF;
+end
+end;
+until (res = 1) or (res = 2) or (res = 3)
+
+
+end;
+
+Begin
+  clrscr;
+  WriteLn('|------------------------------------------------------|');
+  WriteLn('|   Bienvenidos al Hotel Lidotel Boutique Margarita    |');
+  WriteLn('|------------------------------------------------------|');
+  writeln('antes de continuar, por favor introduzca su numero de ');
+  writeln('cedula');
+  WriteLn('|------------------------------------------------------|');
 	readln(name);
     if FileExists((name)) then
-        chequeo
+        chequeoS
     else
-        registro;
-
-end.
+        registroS;
+        TipoRes;
+End.
