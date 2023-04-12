@@ -1,56 +1,57 @@
 
 Program ProyectoFinal;
 
+
 Uses SysUtils, crt;
 
-type
-   Simple = Record
-      nombre: String;
-      apellido: String;
-      telefono: string;
-      cedula:string;
-      email:string;
-      dias:integer;
-      habitacion:string;
-   end;
-   
-   Acompannado = Record
-      nombre1: String;
-      apellido1: String;
-      nombre2: String;
-      apellido2: String;
-      telefono1: string;
-      telefono2: string;
-      cedula1:string;
-      cedula2:string;
-      email:string;
-      dias:integer;
-      habitacion:string;
-      end;
-      
-      Familiar = Record
-      nombre: String;
-      apellido: String;
-      telefono: string;
-      cedula:string;
-      email:string;
-      Peques:integer;
-      Adultos:integer;
-      dias:integer;
-      habitacion:string;
-      end;
+Type 
+  Simple = Record
+    nombre: String;
+    apellido: String;
+    telefono: string;
+    cedula: string;
+    email: string;
+    dias: integer;
+    habitacion: string;
+  End;
+
+  Acompannado = Record
+    nombre1: String;
+    apellido1: String;
+    nombre2: String;
+    apellido2: String;
+    telefono1: string;
+    telefono2: string;
+    cedula1: string;
+    cedula2: string;
+    email: string;
+    dias: integer;
+    habitacion: string;
+  End;
+
+  Familiar = Record
+    nombre: String;
+    apellido: String;
+    telefono: string;
+    cedula: string;
+    email: string;
+    Peques: integer;
+    Adultos: integer;
+    dias: integer;
+    habitacion: string;
+  End;
 
 
 Var 
- 
+
   Ced, NTel, D, res: Integer;
-  Nom, Ape, EM, Tipo_Regis, name: String;
+  Nom, Ape, EM, Tipo_Regis, name, ans: String;
   lista1: Simple;
   lista2: Acompannado;
   lista3: Familiar;
   f1: file Of Simple;
-  f2: file of Acompannado;
-  f3: file of Familiar;
+  f2: file Of Acompannado;
+  f3: file Of Familiar;
 
 Procedure FAMILY_ROOM();
 // 200 por noche
@@ -69,6 +70,9 @@ Begin
   WriteLn('|Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y     |');
   WriteLn('|toldos en la playa, kit de vanidades y niños de 0 a 2 años sin recargos.                   |');
   WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                     200$ por noche                                        |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+
 End;
 Procedure SENCILLA();
 // 60 por noche
@@ -86,6 +90,9 @@ Begin
   WriteLn('|acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso   |');
   WriteLn('|a nuestro moderno gimnasio y Kit de vanidades. Niños de 0 a 2 años sin recargos.           |');
   WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                      60$ por noche                                        |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+
 End;
 Procedure DOBLE();
 // 120 por noche
@@ -103,6 +110,9 @@ Begin
   WriteLn('|acceso a las instalaciones del Business Center, uso de nuestra exclusiva piscina, acceso   |');
   WriteLn('|a nuestro moderno gimnasio y Kit de vanidades. Niños de 0 a 2 años sin recargos.           |');
   WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                     120$ por noche                                        |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+
 End;
 Procedure SUITE();
 // 300 por noche
@@ -120,81 +130,80 @@ Begin
   WriteLn('|Business Center, uso de nuestra exclusiva piscina, acceso a nuestro gimnasio, sillas y     |');
   WriteLn('|toldos en la playa, kit de vanidades y niños de 0 a 2 años sin recargos.                   |');
   WriteLn('|-------------------------------------------------------------------------------------------|');
+  WriteLn('|                                     300$ por noche                                        |');
+  WriteLn('|-------------------------------------------------------------------------------------------|');
+
 End;
-procedure registroS;
-begin
-	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
-Assign(f1,(name));
-   Rewrite(f1);
-   writeln('por favor, ingrese su nombre');
-   readln(lista1.nombre);
-   writeln('por favor, ingrese su apellido');
-   readln(lista1.apellido);
-   writeln('por favor, ingrese su numero de telefono');
-   readln(lista1.telefono);
-   lista1.cedula:=(name);
-   writeln('por favor, ingrese su correo electronico');
-   readln(lista1.email);
-   Write(f1,lista1);
-   Close(f1);
-end;
+Procedure registroS;
+Begin
+  writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+  Assign(f1,(name));
+  Rewrite(f1);
+  writeln('por favor, ingrese su nombre');
+  readln(lista1.nombre);
+  writeln('por favor, ingrese su apellido');
+  readln(lista1.apellido);
+  writeln('por favor, ingrese su numero de telefono');
+  readln(lista1.telefono);
+  lista1.cedula := (name);
+  writeln('por favor, ingrese su correo electronico');
+  readln(lista1.email);
+  Write(f1,lista1);
+  Close(f1);
+End;
 
-procedure registroA;
-begin
-	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
-Assign(f2,(name));
-   Rewrite(f2);
-   writeln('por favor, ingrese su nombre');
-   readln(lista2.nombre1);
-   writeln('por favor, ingrese su apellido');
-   readln(lista2.apellido1);
-   lista2.cedula1:=(name);
-   readln(lista2.telefono1);
-   writeln('Nombre de acopañante');
-   readln(lista2.nombre2);
-   writeln('Apellido de acompañante');
-   readln(lista2.Apellido2);
-   writeln('Cedula de acompañante');
-   readln(lista2.Cedula2);
-   writeln('por favor, ingrese su numero de telefono');
-   readln(lista2.telefono2);
-   writeln('por favor, ingrese su correo electronico');
-   readln(lista1.email);
-   Write(f2,lista2);
-   Close(f2);
-end;
-procedure registroF;
-begin
-	writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
-Assign(f3,(name));
-   Rewrite(f3);
-   writeln('por favor, ingrese su nombre');
-   readln(lista3.nombre);
-   writeln('por favor, ingrese su apellido');
-   readln(lista3.apellido);
-   lista3.cedula:=(name);
-   readln(lista3.telefono);
-   writeln('Cuantos adultos?');
-   readln(lista3.Adultos);
-   writeln('Cuantos infantes?');
-   readln(lista3.Peques);
-   writeln('por favor, ingrese su correo electronico');
-   readln(lista3.email);
-   
-   Write(f3,lista3);
-   Close(f3);
-end;
+Procedure registroA;
+Begin
+  writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+  Assign(f2,(name));
+  Rewrite(f2);
+  writeln('por favor, ingrese su nombre');
+  readln(lista2.nombre1);
+  writeln('por favor, ingrese su apellido');
+  readln(lista2.apellido1);
+  lista2.cedula1 := (name);
+  readln(lista2.telefono1);
+  writeln('Nombre de acopañante');
+  readln(lista2.nombre2);
+  writeln('Apellido de acompañante');
+  readln(lista2.Apellido2);
+  writeln('Cedula de acompañante');
+  readln(lista2.Cedula2);
+  writeln('por favor, ingrese su numero de telefono');
+  readln(lista2.telefono2);
+  writeln('por favor, ingrese su correo electronico');
+  readln(lista1.email);
+  Write(f2,lista2);
+  Close(f2);
+End;
+Procedure registroF;
+Begin
+  writeln('Es un placer que haya seleccionado nuestros servicios, por favor, introduzca sus datos para continuar');
+  Assign(f3,(name));
+  Rewrite(f3);
+  writeln('por favor, ingrese su nombre');
+  readln(lista3.nombre);
+  writeln('por favor, ingrese su apellido');
+  readln(lista3.apellido);
+  lista3.cedula := (name);
+  readln(lista3.telefono);
+  writeln('Cuantos adultos?');
+  readln(lista3.Adultos);
+  writeln('Cuantos infantes?');
+  readln(lista3.Peques);
+  writeln('por favor, ingrese su correo electronico');
+  readln(lista3.email);
 
-
-
-// WriteLn('');
-procedure chequeoS;
-begin
-   assign(f1,(name));
-   reset(f1); 
-   while not eof(f1) do
-   begin
-		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+  Write(f3,lista3);
+  Close(f3);
+End;
+Procedure chequeoS;
+Begin
+  assign(f1,(name));
+  reset(f1);
+  While Not eof(f1) Do
+    Begin
+      writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
       read(f1,lista1);
       writeln('Nombre: ',lista1.nombre);
       writeln('Apellido: ',lista1.apellido);
@@ -203,17 +212,16 @@ begin
       writeln('Correo electronico: ',lista1.email);
       writeln('Dias de estancia programados: ',lista1.dias);
       writeln('Tipo de habitacion: ',lista1.habitacion);
-   end;
-   close(f1);
-end;
-
-procedure chequeoA;
-begin
-   assign(f2,(name));
-   reset(f2); 
-   while not eof(f2) do
-   begin
-		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+    End;
+  close(f1);
+End;
+Procedure chequeoA;
+Begin
+  assign(f2,(name));
+  reset(f2);
+  While Not eof(f2) Do
+    Begin
+      writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
       read(f2,lista2);
       writeln('Nombre: ',lista2.nombre1);
       writeln('Apellido: ',lista2.apellido1);
@@ -226,17 +234,16 @@ begin
       writeln('Correo electronico: ',lista2.email);
       writeln('Dias de estancia programados: ',lista2.dias);
       writeln('Tipo de habitacion: ',lista2.habitacion);
-   end;
-   close(f2);
-end;
-
-procedure chequeoF;
-begin
-   assign(f3,(name));
-   reset(f3); 
-   while not eof(f3) do
-   begin
-		writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
+    End;
+  close(f2);
+End;
+Procedure chequeoF;
+Begin
+  assign(f3,(name));
+  reset(f3);
+  While Not eof(f3) Do
+    Begin
+      writeLn('Es un placer volverlo a ver, estimado cliente, aqui tiene su listado de registro anterior');
       read(f3,lista3);
       writeln('Nombre: ',lista3.nombre);
       writeln('Apellido: ',lista3.apellido);
@@ -247,47 +254,85 @@ begin
       writeln('Correo electronico: ',lista3.email);
       writeln('Dias de estancia programados: ',lista3.dias);
       writeln('Tipo de habitacion: ',lista3.habitacion);
-   end;
-   close(f3);
-end;
+    End;
+  close(f3);
+End;
+Procedure TipoRes;
+Begin
+  writeln('elija el tipo de reservacion');
+  writeln('[1]: Solo | [2]: Acompanado | [3]: Familiar ');
+  Repeat
+    Begin
+      readln(res);
+      If (res = 1) Then
+        Begin
+          chequeoS;
+        End
+      Else If (res = 2) Then
+             Begin
+               chequeoA;
+             End
+      Else If (res = 3) Then
+             Begin
+               chequeoF;
+             End
+    End;
+  Until (res = 1) Or (res = 2) Or (res = 3)
 
-procedure TipoRes;
-begin 
-writeln('elija el tipo de reservacion');
-writeln('[1]: Solo | [2]: Acompanado | [3]: Familiar ');
-repeat
-begin
-readln(res);
-if (res = 1) then
-begin
-chequeoS;
-end
-else if (res = 2) then
-begin
-chequeoA;
-end
-else if (res = 3) then
-begin
-chequeoF;
-end
-end;
-until (res = 1) or (res = 2) or (res = 3)
+
+End;
+Procedure TipoHab;
+Begin
+  WriteLn('|------------------------------------------------------|');
+  WriteLn('|Que tipo de habitacion va a elegir                    |');
+  WriteLn('|puede selecionarlas hasta ver cual le convence mas    |');
+  WriteLn('|------------------------------------------------------|');
+  Repeat
+    WriteLn('|------------------------------------------------------|');
+    writeln('|que tipo de habitacion le interesa mas     |');
+    writeln('[1]: Sencilla | [2]: Doble | [3]: Familiar | [4]: Suit');
+
+    Begin
+      readln(res);
+      If (res = 1) Then
+        Begin
+          SENCILLA;
+        End
+      Else If (res = 2) Then
+             Begin
+               DOBLE;
+             End
+      Else If (res = 3) Then
+             Begin
+               FAMILY_ROOM;
+             End
+
+      Else If (res = 4) Then
+             Begin
+               SUITE;
+             End
+
+    End;
 
 
-end;
+    ReadLn(ans);
+  Until (ans = 'no');
+
+End;
 
 Begin
   clrscr;
   WriteLn('|------------------------------------------------------|');
   WriteLn('|   Bienvenidos al Hotel Lidotel Boutique Margarita    |');
   WriteLn('|------------------------------------------------------|');
-  writeln('antes de continuar, por favor introduzca su numero de ');
-  writeln('cedula');
+  writeln('|antes de continuar, por favor introduzca su numero de |');
+  writeln('|cedula                                                |');
   WriteLn('|------------------------------------------------------|');
-	readln(name);
-    if FileExists((name)) then
-        chequeoS
-    else
-        registroS;
-        TipoRes;
+  readln(name);
+  If FileExists((name)) Then
+    chequeoS
+  Else
+    TipoRes();
+  TipoHab();
 End.
+
